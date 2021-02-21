@@ -1,20 +1,14 @@
-from domain.customer import Customer, CustomerCreatedEvent
+from domain.todo import ToDo
 
 
 def main():
-    customer = Customer.create("Marcelo Santos")
-    print(vars(customer))
+    to_do = ToDo.create("Buy Milk")
+    print(vars(to_do))
 
-    customer.change_name("John Doe")
-    print(vars(customer))
+    to_do.mark_as_done()
+    print(vars(to_do))
 
-    new_customer = Customer.load_from_history(customer.flush_events())
-    print(vars(new_customer))
-
-    try:
-        customer.change_name(1234)
-    except Exception as e:
-        print(e)
+    print(vars(ToDo.load_from_history(to_do.flush_events())))
 
 
 if __name__ == "__main__":
